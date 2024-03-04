@@ -14,7 +14,7 @@ type TodoEvent = AddAction | ChangAction | DeletAction;
 // in a real world app, there should be a mechanism to assign ids univocally
 // i.e. import { uuid } from 'uuidv4';
 // implementing such mechanism is outside the scope of the exercise
-let nextId = 3;
+let nextId = 101;
 
 const reducer = (state: Todo[], event: TodoEvent) =>
   match(event)

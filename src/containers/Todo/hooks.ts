@@ -77,7 +77,7 @@ export const useTodosReducer = (initialTodos: Todo[]) => {
 export function useTodoState() {
   const todos = React.useContext(TodoStateContext);
   if (typeof todos === 'undefined') {
-    throw new Error('useTodoState must be used within a CountProvider');
+    throw new Error('useTodoState must be used within a TodoProvider');
   }
   return todos;
 }
@@ -85,7 +85,7 @@ export function useTodoState() {
 export function useTodoUpdater() {
   const handlers = React.useContext(TodoUpdaterContext);
   if (typeof handlers === 'undefined') {
-    throw new Error('useTodoUpdater must be used within a CountProvider');
+    throw new Error('useTodoUpdater must be used within a TodoProvider');
   }
   return handlers;
 }

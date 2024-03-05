@@ -1,14 +1,14 @@
 import AddTodo from '@/components/AddTodo';
 import TodoList from '@/components/TodoList';
-import { useTodoList } from '@/hooks/useTodoList';
+import { useTodoState, useTodoUpdater } from './TodoProvider';
 
-import type { Todo } from '@/types';
-
-export type TodoWidgetProps = { todos: Todo[] };
-
-export function TodoWidget({ todos: initialTodos }: TodoWidgetProps) {
-  const [todos, handleAddTodo, handleChangeTodo, handleDeleteTodo] =
-    useTodoList(initialTodos);
+export function TodoWidget() {
+  const todos = useTodoState();
+  const {
+    add: handleAddTodo,
+    update: handleChangeTodo,
+    remove: handleDeleteTodo,
+  } = useTodoUpdater();
 
   return (
     <>

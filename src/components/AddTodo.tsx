@@ -1,24 +1,32 @@
-import { useState } from 'react';
+import React from 'react';
+
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 export type AddTodoProps = { onAddTodo: (text: string) => void };
 
 export default function AddTodo({ onAddTodo }: AddTodoProps) {
-  const [text, setText] = useState('');
+  const [text, setText] = React.useState('');
+
   return (
-    <>
-      <input
+    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline' }}>
+      <TextField
         placeholder="Add todo"
         value={text}
         onChange={(e) => setText(e.target.value)}
+        sx={{ width: '100%' }}
       />
-      <button
+      <Button
+        variant="contained"
         onClick={() => {
           setText('');
           onAddTodo(text);
         }}
+        sx={{ ml: 2 }}
       >
         Add
-      </button>
-    </>
+      </Button>
+    </Box>
   );
 }

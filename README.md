@@ -116,13 +116,13 @@ I think that the most interesting point is the use of [pattern matching](https:/
 
 I intentionally over-used it to demonstrate the power and flexibility of this approach:
 
-- `TodoPage` uses in two occasion, one in the simpler `<StatusChip/>` component (matching a plain string) and another in the JSX part (matching a pattern on its state)
-- `useTodosReducer` also uses it
-- `useFetch` hook models its state.
+- `TodoPage` uses in two occasion, one in the simpler `<StatusChip/>` component (matching a plain string) and another in the return body (matching a pattern on its state). In both cases, the match returns JSX elements
+- `useTodosReducer` also uses it, but this time for matching the reducer state. It uses the same pattern matching style of the `TodoPage` component
+- `useFetch` hook uses it to match on it's reducer AND events.
 
-I should point out that the last example has really little utility in a production app (at least as-is). It's main purpose is to demonstrate how to handle complex conditions. In this case, to avoid unwanted state changes that could lead to bugs, we want our state reducer function to branch on both the state and the event, and return a new state.
-
-> Only a subset of these fetch events make sense for each given state - `'success'`, `'error'` and `'cancel'` events only make sense when we are currently in the `'loading'` state.
+> Although the last example may have little utility in a production app (please use a library like `reat-query` for proper declarative fetch handling), it's demonstrate clearly how complex conditions can be handeld with this technique. In this case, to avoid unwanted state changes that could lead to bugs, we want our state reducer function to branch on both the state and the event, and return a new state.
+>
+> Only a subset of fetch events make sense for each given state - `'success'`, `'error'` and `'cancel'` events only make sense when we are currently in the `'loading'` state.
 
 I leave other details for the follow-up call.
 

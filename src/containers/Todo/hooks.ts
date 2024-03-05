@@ -1,22 +1,22 @@
 import React from 'react';
+
+import { TodoStateContext, TodoUpdaterContext } from './context';
+import { Todo, TodoAction } from '@/types';
 import { match } from 'ts-pattern';
-
-import type { Todo, ReducerAction } from '@/types';
-
-type AddAction = ReducerAction<'added', Omit<Todo, 'completed'>>;
-type ChangAction = ReducerAction<'changed', { todo: Todo }>;
-type DeleteAction = ReducerAction<'deleted', Pick<Todo, 'id'>>;
 
 // I use the word event but you can replace it with action if you are used to
 // Redux's terminology.
-type TodoEvent = AddAction | ChangAction | DeleteAction;
+type AddEvent = TodoAction<'added', Omit<Todo, 'completed'>>;
+type ChangEvent = TodoAction<'changed', { todo: Todo }>;
+type DeleteEvent = TodoAction<'deleted', Pick<Todo, 'id'>>;
+type TodoEvent = AddEvent | ChangEvent | DeleteEvent;
 
 // in a real world app, there should be a mechanism to assign ids univocally
 // i.e. import { uuid } from 'uuidv4';
 // implementing such mechanism is outside the scope of the exercise
 let nextId = 101;
 
-const reducer = (state: Todo[], event: TodoEvent) =>
+const reducer: React.Reducer<Todo[], TodoEvent> = (state, event) =>
   match(event)
     .returnType<Todo[]>()
     .with({ type: 'added' }, ({ payload }) => [
@@ -35,7 +35,7 @@ const reducer = (state: Todo[], event: TodoEvent) =>
     )
     .exhaustive();
 
-export const useTodosImplementation = (initialTodos: Todo[]) => {
+export const useTodosReducer = (initialTodos: Todo[]) => {
   const [todos, dispatch] = React.useReducer(reducer, initialTodos);
 
   // NOTE: it *might* be unnecessary to memoize these function because dispatch
@@ -74,15 +74,18 @@ export const useTodosImplementation = (initialTodos: Todo[]) => {
   return [todos, add, update, remove] as const;
 };
 
-// NOTE: by using separate providers for the state and the dispatch we allow
-// a component to skip unnecessary re-renderings if the component just use the
-// state context.
-//
-// Example case:
-// <TodoProvider>
-//   <TodoDisplay /> // only reads Todos
-//   <TodoEditor /> // reads and updates Todos
-// </TodoProvider>
-//
-// No need to use useMemo() inside <TodoList /> because by avoiding context
-// updates we avoid the re-render of that component entirely
+export function useTodoState() {
+  const todos = React.useContext(TodoStateContext);
+  if (typeof todos === 'undefined') {
+    throw new Error('useTodoState must be used within a CountProvider');
+  }
+  return todos;
+}
+
+export function useTodoUpdater() {
+  const handlers = React.useContext(TodoUpdaterContext);
+  if (typeof handlers === 'undefined') {
+    throw new Error('useTodoUpdater must be used within a CountProvider');
+  }
+  return handlers;
+}

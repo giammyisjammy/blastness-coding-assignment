@@ -16,7 +16,7 @@ export type Todo = {
   completed: boolean;
 };
 
-export type ReducerAction<
+export type TodoAction<
   T extends string = string,
   P extends Record<string, unknown> = Record<string, unknown>
 > = {

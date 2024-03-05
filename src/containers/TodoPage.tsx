@@ -7,12 +7,10 @@ import Typography from '@mui/material/Typography';
 
 import { useFetch } from '@/hooks/useFetch';
 
-import { TodoProvider } from './TodoProvider';
 import { TodoWidget } from './TodoWidget';
 
 import type { LoadingStatus, Todo } from '@/types';
 
-// const url = 'https://jsonplaceholder.typicode.com/todos/10';
 const url = 'https://jsonplaceholder.typicode.com/users/1/todos';
 
 export default function TodoPage() {
@@ -45,9 +43,7 @@ export default function TodoPage() {
             </>
           ))
           .with({ status: 'success' }, ({ data: todos }) => (
-            <TodoProvider initialTodos={todos}>
-              <TodoWidget />
-            </TodoProvider>
+            <TodoWidget initialTodos={todos} />
           ))
           .exhaustive()}
       </Paper>

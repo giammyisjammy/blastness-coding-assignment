@@ -11,6 +11,10 @@ import { TodoWidget } from './TodoWidget';
 
 import type { LoadingStatus, Todo } from '@/types';
 
+/**
+ * NOTE: although the API also returns a field named "userId" it is voluntarily
+ * ignored because that information is outside the app scope
+ */
 const url = 'https://jsonplaceholder.typicode.com/users/1/todos';
 
 export default function TodoPage() {

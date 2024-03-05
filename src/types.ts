@@ -7,8 +7,8 @@ export type LoadingState<T> =
   | { status: 'error'; error: Error };
 
 /**
- * NOTE: the field "userId" is voluntarily omitted because this information
- * is irrelevant to app scope
+ * NOTE: although the API also returns a field named "userId" it is voluntarily
+ * ignored because that information is outside the app scope
  */
 export interface Todo {
   id: number;

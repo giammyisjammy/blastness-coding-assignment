@@ -12,7 +12,9 @@ function LightBulbIcon(props: SvgIconProps) {
 
 export default function ProTip() {
   return (
-    <Typography sx={{ mt: 6, mb: 3, color: 'text.secondary' }}>
+    <Typography
+      sx={{ mt: 6, mb: 3, color: 'text.secondary', textAlign: 'center' }}
+    >
       <LightBulbIcon sx={{ mr: 1, verticalAlign: 'middle' }} />
       {'Pro tip: using '}
       <Link href="https://github.com/gvergnaud/ts-pattern">ts-pattern</Link>

@@ -9,7 +9,7 @@ import TodoPage from '@/containers/TodoPage';
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © Gianmarco ('}
+      {'Copyright © Gianmarco Bado ('}
       <Link color="inherit" href="https://github.com/giammyisjammy">
         @giammyisjammy
       </Link>
@@ -21,7 +21,7 @@ function Copyright() {
 
 export default function App() {
   return (
-    <Container maxWidth="sm">
+    <Container component="main" maxWidth="sm">
       <Box sx={{ my: 4 }}>
         <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
           Todo List in TypeScript

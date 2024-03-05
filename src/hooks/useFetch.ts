@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useReducer, useRef } from 'react';
+import React from 'react';
+
 import { match, P } from 'ts-pattern';
 
 import fetcher, { ResponseError } from '@/helpers/fetch';
@@ -50,12 +51,12 @@ export function useFetch<T>(
   // inefficient and can introduce memory leaks in the app.
   const isMounted = useMountedState();
   const reducer = typedReducer<T>();
-  const [state, dispatch] = useReducer(reducer, initState);
+  const [state, dispatch] = React.useReducer(reducer, initState);
 
   /**
    * Handle fetch request
    */
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: 'fetch' });
       try {
@@ -78,10 +79,10 @@ export function useFetch<T>(
 // internal helper
 
 function useMountedState(): () => boolean {
-  const mountedRef = useRef<boolean>(false);
-  const get = useCallback(() => mountedRef.current, []);
+  const mountedRef = React.useRef<boolean>(false);
+  const get = React.useCallback(() => mountedRef.current, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     mountedRef.current = true;
 
     return () => {

@@ -7,6 +7,7 @@ import { CssBaseline } from '@mui/material';
 import App from './App';
 import theme from './theme';
 
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>

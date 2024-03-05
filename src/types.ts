@@ -10,16 +10,16 @@ export type LoadingState<T> =
  * NOTE: the field "userId" is voluntarily omitted because this information
  * is irrelevant to app scope
  */
-export type Todo = {
+export interface Todo {
   id: number;
   title: string;
   completed: boolean;
-};
+}
 
-export type TodoAction<
+export interface TodoAction<
   T extends string = string,
   P extends Record<string, unknown> = Record<string, unknown>
-> = {
+> {
   type: T;
   payload: P;
-};
+}

@@ -5,10 +5,10 @@ import { useTodosReducer } from './hooks';
 
 import type { Todo } from '@/types';
 
-export type TodoProviderProps = {
+export interface TodoProviderProps {
   children: React.ReactNode;
   initialTodos: Todo[];
-};
+}
 
 export const TodoProvider = ({ children, initialTodos }: TodoProviderProps) => {
   const [todos, add, update, remove] = useTodosReducer(initialTodos);

@@ -4,7 +4,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-export type AddTodoProps = { onAddTodo: (text: string) => void };
+export interface AddTodoProps {
+  onAddTodo: (text: string) => void;
+}
 
 export default function AddTodo({ onAddTodo }: AddTodoProps) {
   const [text, setText] = React.useState('');
@@ -14,7 +16,9 @@ export default function AddTodo({ onAddTodo }: AddTodoProps) {
       <TextField
         placeholder="Add todo"
         value={text}
-        onChange={(e) => setText(e.target.value)}
+        onChange={(e) => {
+          setText(e.target.value);
+        }}
         sx={{ width: '100%' }}
       />
       <Button

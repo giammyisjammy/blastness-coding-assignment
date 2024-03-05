@@ -38,7 +38,7 @@ export default function TodoPage() {
             <>
               <h1>Error!</h1>
               <Typography variant="body1">
-                the error message is "{error.message}"
+                the error message is &quot;{error.message}&quot;
               </Typography>
             </>
           ))

@@ -41,16 +41,16 @@ const reducer = <T>(state: LoadingState<T>, event: Event<T>): LoadingState<T> =>
 
 // in a real world app, this task would be delegated to a robust library like
 // react-query or SWR
-export function useFetch<T>(
+export function useFetch<R>(
   url: RequestInfo | URL,
   options?: RequestInit
-): LoadingState<T> {
+): LoadingState<R> {
   // Since you can never be sure when data will resolve with asynchronous
   // programming, there’s always a risk that the data will resolve after the
   // component  has been removed. Updating data on an unmounted component is
   // inefficient and can introduce memory leaks in the app.
   const isMounted = useMountedState();
-  const reducer = typedReducer<T>();
+  const reducer = typedReducer<R>();
   const [state, dispatch] = React.useReducer(reducer, initState);
 
   /**
@@ -60,7 +60,7 @@ export function useFetch<T>(
     const fetchData = async () => {
       dispatch({ type: 'fetch' });
       try {
-        const data = await fetcher(url, options);
+        const data = (await fetcher(url, options)) as R;
         if (isMounted()) {
           // prevent data updates on unmounted components.
           dispatch({ type: 'success', data });
@@ -70,8 +70,8 @@ export function useFetch<T>(
       }
     };
 
-    fetchData();
-  }, []);
+    void fetchData();
+  }, [isMounted, url, options]);
 
   return state;
 }

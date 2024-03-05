@@ -14,11 +14,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import type { Todo } from '@/types';
 
-export type TodoListProps = {
+export interface TodoListProps {
   todos: Todo[];
   onChangeTodo: (todo: Todo) => void;
   onDeleteTodo: (id: Todo['id']) => void;
-};
+}
 
 export default function TodoList({
   todos,
@@ -89,14 +89,18 @@ function Todo({ todo, onChange, onDelete }: TodoProps) {
         <IconButton
           aria-label="edit"
           color="primary"
-          onClick={() => setIsEditing(!isEditing)}
+          onClick={() => {
+            setIsEditing(!isEditing);
+          }}
         >
           <EditIcon />
         </IconButton>
         <IconButton
           aria-label="delete"
           color="error"
-          onClick={() => onDelete(todo.id)}
+          onClick={() => {
+            onDelete(todo.id);
+          }}
         >
           <DeleteIcon />
         </IconButton>

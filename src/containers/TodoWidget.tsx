@@ -5,7 +5,9 @@ import { TodoProvider, useTodoState, useTodoUpdater } from './Todo';
 
 import { Todo } from '@/types';
 
-export type TodoWidgetProps = { initialTodos: Todo[] };
+export interface TodoWidgetProps {
+  initialTodos: Todo[];
+}
 
 export function TodoWidget({ initialTodos }: TodoWidgetProps) {
   const todos = useTodoState();

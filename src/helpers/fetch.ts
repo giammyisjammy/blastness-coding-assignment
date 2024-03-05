@@ -1,7 +1,7 @@
 export class ResponseError extends Error {
-  public response: Response | globalThis.Response;
+  public response: Response;
 
-  constructor(response: Response | globalThis.Response) {
+  constructor(response: Response) {
     super(response.statusText);
     this.response = response;
   }
@@ -14,7 +14,7 @@ export class ResponseError extends Error {
  *
  * @return {object}          The parsed JSON from the request
  */
-function parseJSON(response: Response | globalThis.Response) {
+function parseJSON(response: Response) {
   if (response.status === 204 || response.status === 205) {
     return null;
   }
@@ -28,7 +28,7 @@ function parseJSON(response: Response | globalThis.Response) {
  *
  * @return {object|undefined} Returns either the response, or throws an error
  */
-export function checkStatus(response: Response | globalThis.Response) {
+export function checkStatus(response: Response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }

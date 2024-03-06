@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import { useFetch } from '@/hooks/useFetch';
 
 import { TodoWidget } from './TodoWidget';
+import { TodoProvider } from './Todo';
 
 import type { LoadingStatus, Todo } from '@/types';
 
@@ -47,7 +48,9 @@ export default function TodoPage() {
             </>
           ))
           .with({ status: 'success' }, ({ data: todos }) => (
-            <TodoWidget initialTodos={todos} />
+            <TodoProvider initialTodos={todos}>
+              <TodoWidget />
+            </TodoProvider>
           ))
           .exhaustive()}
       </Paper>

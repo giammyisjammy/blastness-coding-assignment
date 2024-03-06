@@ -1,15 +1,9 @@
 import AddTodo from '@/components/AddTodo';
 import TodoList from '@/components/TodoList';
 
-import { TodoProvider, useTodoState, useTodoUpdater } from './Todo';
+import { useTodoState, useTodoUpdater } from './Todo';
 
-import { Todo } from '@/types';
-
-export interface TodoWidgetProps {
-  initialTodos: Todo[];
-}
-
-export function TodoWidget({ initialTodos }: TodoWidgetProps) {
+export function TodoWidget() {
   const todos = useTodoState();
   const {
     add: handleAddTodo,
@@ -18,13 +12,13 @@ export function TodoWidget({ initialTodos }: TodoWidgetProps) {
   } = useTodoUpdater();
 
   return (
-    <TodoProvider initialTodos={initialTodos}>
+    <>
       <AddTodo onAddTodo={handleAddTodo} />
       <TodoList
         todos={todos}
         onChangeTodo={handleChangeTodo}
         onDeleteTodo={handleDeleteTodo}
       />
-    </TodoProvider>
+    </>
   );
 }
